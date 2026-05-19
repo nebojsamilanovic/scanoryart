@@ -16,8 +16,8 @@
 
   <style>
     /* ==========================================
-        🎨 GLAVNE BOJE SAJTA (Premium Paleta)
-        ========================================== */
+       🎨 GLAVNE BOJE SAJTA (Premium Paleta)
+       ========================================== */
     :root {
       --bg: #f3eae1;          
       --bg-2: #e1d3c7;        
@@ -36,13 +36,13 @@
     body.is-loading { position: fixed; width: 100%; height: 100vh; overflow: hidden; }
     body { margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; color: var(--text); background-color: var(--bg); background-image: radial-gradient(circle at top, #faf7f2 0%, var(--bg) 60%, var(--bg-2) 100%); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     
-    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: 0.25; z-index: 998; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E"); mix-blend-mode: multiply; }
+    /* TEKSTURA JE UKLONJENA */
     
     .ambient-glow { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(166,124,82,0.15) 0%, transparent 70%); top: -200px; left: -200px; pointer-events: none; z-index: 1; }
 
     /* ==========================================
-        ✨ VIZUELNO OŽIVLJAVANJE
-        ========================================== */
+       ✨ VIZUELNO OŽIVLJAVANJE
+       ========================================== */
     .gold-sweep {
       background: linear-gradient(90deg, var(--gold) 0%, #b89771 50%, var(--gold) 100%);
       background-size: 200% auto;
@@ -55,8 +55,8 @@
     @keyframes sweep { to { background-position: 200% center; } }
 
     /* ==========================================
-        🔐 LOADER & TAP TO ENTER (VRAĆENO)
-        ========================================== */
+       🔐 LOADER & TAP TO OPEN (DODATO)
+       ========================================== */
     #loader { position: fixed; inset: 0; background: #0f0c0a; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #ebdaca; }
     .loader-initials { font-family: 'Cormorant Garamond', serif; font-size: 52px; letter-spacing: 0.3em; animation: pulse 2.5s infinite alternate; font-weight: 300; text-shadow: 0 0 25px rgba(166,124,82,0.4); }
     .loader-text { margin-top: 20px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5em; opacity: 0.6; font-weight: 500; }
@@ -144,10 +144,10 @@
     .text-block-fullscreen p { margin: 0 auto; max-width: 620px; font-size: clamp(17px, 4.5vw, 21px); line-height: 1.65; color: #4a3422; font-weight: 300; }
 
     /* ==========================================
-        🎞️ CINEMATIC CROSSFADE GALERIJA (VRAĆENO)
-        ========================================== */
+       🎞️ CINEMATIC CROSSFADE GALERIJA
+       ========================================== */
     .cinematic-gallery-container { 
-        height: 600vh; /* Visina zavisi od broja slika (ovdje imamo npr. 6 slika) */
+        height: 600vh; /* Zavisno od broja slika (5 slika = 600vh) */
         width: 100vw; 
         margin-left: calc(-50vw + 50%); 
         position: relative; 
@@ -157,7 +157,6 @@
     .gallery-img { position: absolute; inset: 0; opacity: 0; transform: scale(1.1); will-change: transform, opacity; }
     .gallery-img.active { opacity: 1; transform: scale(1); }
     .gallery-img img { width: 100%; height: 100%; object-fit: cover; }
-    /* Blaga vinjeta preko slika da se izbjegne prejak kontrast i omekša prelaz */
     .gallery-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.6) 100%); z-index: 100; pointer-events: none;}
 
     /* HOLD TO REVEAL */
