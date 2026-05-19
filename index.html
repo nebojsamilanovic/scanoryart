@@ -660,7 +660,7 @@
         else { tapTimer = setTimeout(() => { tapCount = 0; }, 800); }
     });
 
-    let lastX = null, lastY = null, lastZ = null; let shakeThreshold = 20; 
+    let lastX = null, lastY = null, lastZ = null; let shakeThreshold = 50; 
     function devicemotionHandler(event) {
         if (hasShaken) return;
         let acc = event.accelerationIncludingGravity; if (!acc) return;
