@@ -48,7 +48,7 @@
     @keyframes pulseBtn { 0% { box-shadow: 0 0 0 0 rgba(166,124,82, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(166,124,82, 0); } 100% { box-shadow: 0 0 0 0 rgba(166,124,82, 0); } }
     @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.98); } 100% { opacity: 1; transform: scale(1.02); } }
 
-    /* VRAĆENA ORIGINALNA TIPOGRAFIJA BEZ PRELIJEVANJA */
+    /* Tvoja font familija */
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; margin: 0; letter-spacing: -0.01em; color: #15100c; }
     .page { width: min(100%, 900px); margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 10; }
 
@@ -77,54 +77,23 @@
     .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
     .caption { color: var(--muted); font-size: 12px; letter-spacing: 0.15em; padding: 20px 8px 4px; text-align: center; text-transform: uppercase; font-weight: 500; }
     
-    /* ==========================================
-       🌌 NOVO PLAVO POKRETNO NEBO (Promijenjeno)
-       ========================================== */
+    /* PLAVO ZVJEZDANO NEBO */
     .star-map-fullscreen { 
         width: 100vw; 
         margin-left: calc(-50vw + 50%); 
         height: 100vh; 
-        /* Radial BLUE SKY GRADIENT - New */
         background: radial-gradient(ellipse at center, #1e3a8a 0%, #0c1a40 100%); 
         color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; box-shadow: inset 0 0 100px rgba(0,0,0,0.8); padding: 0 20px; 
     }
-
-    /* Blagi 'glow' prilagođen plavom nebu */
-    .star-map-fullscreen::before { content:''; position:absolute; top:30%; right:15%; width:40vw; height:40vw; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0.2) 50%, transparent 70%); border-radius:50%; filter: blur(35px); mix-blend-mode: color-dodge; opacity: 0.4;}
     
-    /* Kontejner za zvijezde */
-    .stars-overlay { 
-        position: absolute; 
-        inset: 0; 
-        background: transparent; /* Remove old solid overlay */
-        z-index: 1; 
-        overflow: hidden; /* Added overflow for animation */
-    }
-
-    /* Seamless Box-Shadow Moving Stars trick */
+    .stars-overlay { position: absolute; inset: 0; background: transparent; z-index: 1; overflow: hidden; }
     .stars-overlay::before, .stars-overlay::after {
-        content: " ";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 1px;
-        height: 1px;
-        background: transparent;
-        /* Generated shadow list for visibility and coverage */
+        content: " "; position: absolute; top: 0; left: 0; width: 1px; height: 1px; background: transparent;
         box-shadow: 768px 104px #fff, 122px 28px #fff, 439px 571px #fff, 1102px 1761px #fff, 950px 1321px #fff, 1511px 40px #fff, 290px 1480px #fff, 1601px 880px #fff, 140px 1602px #fff, 1888px 231px #fff, 105px 1982px #fff, 1470px 352px #fff, 555px 1120px #fff, 1210px 720px #fff, 1999px 80px #fff, 360px 1490px #fff, 1702px 612px #fff, 666px 1333px #fff, 1199px 111px #fff, 831px 1952px #fff, 150px 1500px #fff, 1800px 1800px #fff, 900px 900px #fff, 250px 250px #fff, 1600px 300px #fff, 400px 1600px #fff, 100px 100px #fff, 1900px 1900px #fff, 500px 500px #fff, 1750px 750px #fff, 1250px 1250px #fff, 750px 1750px #fff, 60px 1900px #fff, 1900px 60px #fff;
         animation: animStar 50s linear infinite;
     }
-
-    /* Seamless looping copy */
-    .stars-overlay::after {
-        top: 2000px; /* Offset matching animation height */
-    }
-
-    /* Animation for moving up */
-    @keyframes animStar {
-        from { transform: translateY(0); }
-        to { transform: translateY(-2000px); }
-    }
+    .stars-overlay::after { top: 2000px; animation: animStar 50s linear infinite; }
+    @keyframes animStar { from { transform: translateY(0); } to { transform: translateY(-2000px); } }
 
     .star-map-content { position: relative; z-index: 2; }
     .star-map-content h2 { color: #eedfcc; margin-bottom: 18px; font-size: clamp(40px, 8vw, 80px); text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
@@ -151,15 +120,14 @@
     .timeline-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #15100c; margin-bottom: 10px; }
     .timeline-content { font-size: 16px; line-height: 1.6; color: #4a3422; margin: 0; }
 
-    /* BUCKET LIST */
-    .bucket-card { padding: 60px 30px; }
-    .bucket-title { text-align: center; font-size: 42px; margin-bottom: 40px; color: #15100c; }
-    .bucket-list { list-style: none; padding: 0; margin: 0 auto; max-width: 400px; }
-    .bucket-list li { display: flex; align-items: flex-start; margin-bottom: 25px; font-size: clamp(15px, 4.5vw, 18px); color: #4a3422; font-weight: 400; line-height: 1.4; }
-    .check-box { flex-shrink: 0; width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 6px; margin-right: 15px; margin-top: 2px; display: flex; justify-content: center; align-items: center; transition: all 0.3s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
-    .bucket-list li.done .check-box { background: var(--accent); border-color: var(--accent); box-shadow: 0 2px 10px rgba(166,124,82,0.4); }
-    .bucket-list li.done .check-box::after { content: '✓'; color: #fff; font-size: 14px; font-weight: bold; }
-    .bucket-list li.done { opacity: 0.6; text-decoration: line-through; text-decoration-color: var(--accent); }
+    /* NOVI "FUTURE SNAPSHOT" ITEM SA premium formatiranjem */
+    .future-card { padding: 60px 40px; text-align: center;}
+    .future-content { max-width: 500px; margin: 0 auto; }
+    .future-eyebrow { text-transform: uppercase; letter-spacing: 0.35em; font-size: 11px; color: var(--gold); margin-bottom: 15px; font-weight: 600;}
+    .future-list { list-style: none; padding: 0; margin: 40px 0 0 0; text-align: left;}
+    .future-item { display: flex; align-items: flex-start; margin-bottom: 25px; gap: 18px; }
+    .future-dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-top: 6px; box-shadow: 0 0 10px rgba(166,124,82,0.4); }
+    .future-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #4a3422; line-height: 1.4; font-style: italic; }
 
     /* FULLSCREEN TEXT BLOCK */
     .text-block-fullscreen { width: 100vw; margin-left: calc(-50vw + 50%); padding: 140px 24px; text-align: center; background: linear-gradient(to bottom, transparent, rgba(166,124,82,0.08), transparent); }
@@ -167,31 +135,33 @@
     .text-block-fullscreen p { margin: 0 auto; max-width: 620px; font-size: clamp(17px, 4.5vw, 21px); line-height: 1.65; color: #4a3422; font-weight: 300; }
 
     /* ==========================================
-       🎞️ CINEMATIC CROSSFADE GALERIJA (BEZ CROP-A!)
+       🎞️ CINEMATIC CROSSFADE GALERIJA (BEZ Crne!)
        ========================================== */
     .cinematic-gallery-container { 
         height: 1000vh; /* Zavisno od broja slika daje prostora za dug, fluidan skrol */
         width: 100vw; 
         margin-left: calc(-50vw + 50%); 
         position: relative; 
-        background: #050403; /* Kino mrak da slike dišu */
+        /* NOVA POZADINA: Meka premium tamna, NE CRNA */
+        background: #1e1610; 
     }
     .gallery-sticky { position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
     
-    .gallery-img { position: absolute; inset: 0; opacity: 0; transform: scale(1.05); display: flex; align-items: center; justify-content: center; padding: 20px; will-change: transform, opacity; }
-    .gallery-img.active { opacity: 1; transform: scale(1); }
+    .gallery-img { position: absolute; inset: 0; opacity: 0; transform: scale(1.05); display: flex; align-items: center; justify-content: center; padding: 20px; will-change: transform, opacity; z-index: 1;}
+    /* GSAP upravlja opacity i z-index-om direktno */
     
-    /* SLIKE SE NE SIJEKU! Zadržavaju originalni format uz blago zaobljene ivice */
+    /* SLIKE SE NE SIJEKU! object-fit: contain zadržava originalni format */
     .gallery-img img { 
         max-width: 100%; 
         max-height: 100%; 
         object-fit: contain; 
         border-radius: 16px; 
-        box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        /* Mekša sjena za svjetliju pozadinu */
+        box-shadow: 0 25px 50px rgba(0,0,0,0.6);
     }
     
-    /* Blaga filmska vinjeta preko svega za premium fade efekat */
-    .gallery-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.8) 100%); z-index: 100; pointer-events: none;}
+    /* Filmska vinjeta preko svega za premium fade efekat */
+    .gallery-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 50%, rgba(30,22,16,0.8) 100%); z-index: 100; pointer-events: none;}
 
     /* HOLD TO REVEAL */
     .hold-container { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y; transition: box-shadow 0.6s ease; }
@@ -329,6 +299,7 @@
           <div class="ticker-box"><div class="ticker-num" id="t-mins">0</div><div class="ticker-label">Mins</div></div>
           <div class="ticker-box" style="background: rgba(166,124,82,0.15); border-color: rgba(166,124,82,0.6);"><div class="ticker-num" id="t-secs" style="color: var(--accent);">0</div><div class="ticker-label">Secs</div></div>
         </div>
+      </div>
     </section>
 
     <section class="section split" id="depthSection">
@@ -356,7 +327,7 @@
 
     <section class="section gs-reveal" style="padding: 0;">
       <div class="star-map-fullscreen">
-        <div class="stars-overlay gs-reveal"></div>
+        <div class="stars-overlay"></div>
         <div class="star-map-content">
           <h2>Under these stars,<br>it all began.</h2>
           <p>Banja Luka — February 14, 2022</p>
@@ -409,16 +380,25 @@
     </section>
 
     <section class="section gs-reveal">
-      <div class="card bucket-card">
-        <div class="eyebrow" style="text-align: center;">Promises</div>
-        <h2 class="bucket-title">The Bucket List</h2>
-        <ul class="bucket-list">
-          <li class="done"><div class="check-box"></div> Surviving Ikea furniture assembly together</li>
-          <li class="done"><div class="check-box"></div> That unplanned road trip to the coast</li>
-          <li><div class="check-box"></div> Kissing under the Northern Lights</li>
-          <li><div class="check-box"></div> Getting a dog and naming him something ridiculous</li>
-          <li><div class="check-box"></div> Saying "I do"</li>
-        </ul>
+      <div class="card future-card">
+          <div class="future-content">
+              <div class="future-eyebrow">Snapshots</div>
+              <h2>Pogled u budućnost</h2>
+              <ul class="future-list">
+                  <li class="future-item">
+                      <div class="future-dot"></div>
+                      <div class="future-text">Kafa na balkonu dok se grad budi.</div>
+                  </li>
+                  <li class="future-item">
+                      <div class="future-dot"></div>
+                      <div class="future-text">Zajednički zalazak sunca na nekoj novoj plaži.</div>
+                  </li>
+                  <li class="future-item">
+                      <div class="future-dot"></div>
+                      <div class="future-text">Držanje za ruke dok hodamo ulicama koje još nismo otkrili.</div>
+                  </li>
+              </ul>
+          </div>
       </div>
     </section>
 
@@ -619,10 +599,13 @@
     gsap.to("#tLine", { height: "100%", ease: "none", scrollTrigger: { trigger: "#loveTimeline", start: "top 70%", end: "bottom 70%", scrub: true } });
 
     // ==========================================
-    // 🎞️ CINEMATIC CROSSFADE GALERIJA
+    // 🎞️ CINEMATIC CROSSFADE GALERIJA (Popravljena logika prelijevanja)
     // ==========================================
     const allGalleryImgs = gsap.utils.toArray('.gallery-img');
     if(allGalleryImgs.length > 0) {
+        // Skrivamo sve slike osim prve za čist start
+        gsap.set(allGalleryImgs.slice(1), { opacity: 0 });
+
         let galTl = gsap.timeline({
             scrollTrigger: { trigger: ".cinematic-gallery-container", start: "top top", end: "bottom bottom", scrub: 1 }
         });
@@ -631,9 +614,16 @@
             if(i === 0) {
                 galTl.to(img, { scale: 1.02, duration: 1, ease: "none" }, 0);
             } else {
-                galTl.to(img, { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, i - 0.5);
+                // Crossfade: Trenutna slika izlazi, nova ulazi. Z-index se automatski rješava stacking orderom u HTMLu, ali GSAP osigurava čistoću prelijevanja.
+                
+                // Prethodna slika se melt-out-uje
+                galTl.to(allGalleryImgs[i-1], { opacity: 0, scale: 0.98, duration: 1, ease: "power2.inOut" }, i - 0.7);
+                
+                // Nova slika se melt-in-uje
+                galTl.to(img, { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, i - 0.7);
+                
                 if(i !== allGalleryImgs.length - 1) {
-                    galTl.to(img, { scale: 1.02, duration: 1, ease: "none" }, i + 0.5);
+                    galTl.to(img, { scale: 1.02, duration: 1, ease: "none" }, i + 0.3);
                 }
             }
         });
