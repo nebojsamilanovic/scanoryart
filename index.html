@@ -771,26 +771,30 @@
     function toggleWave() { if (!song.paused || !voice.paused) { waveVisual.style.display = 'flex'; } else { waveVisual.style.display = 'none'; } }
     
     playBtn.addEventListener('click', () => { 
+        const song = document.getElementById('song');
+        const crackleAudio = document.getElementById('crackleAudio');
+        
         if (song.paused) { 
-            // Pokušavamo pustiti krckanje, ako telefon ne da - idemo dalje bez greške
+            // Prvo palimo tiho krckanje gramofona u pozadini
             if (crackleAudio) {
-                crackleAudio.play().catch(e => console.log("Crackle blocked, continuing..."));
+                crackleAudio.play().catch(e => console.log("Crackle audio blocked"));
             }
             
-            // Puštanje tvoje pjesme
+            // Puštamo tvoju pjesmu
             song.play().then(() => {
                 playBtn.innerHTML = '⏸ Pause Song';
+                toggleWave(); // Pali animaciju talasa
             }).catch(error => {
-                alert("Molimo dodirnite ekran bilo gdje, pa pokušajte ponovo!");
-                console.log("Playback error:", error);
+                console.log("Audio playback error:", error);
             });
             
         } else { 
+            // Ako pjesma već svira, klik je pauzira
             if (crackleAudio) crackleAudio.pause(); 
             song.pause(); 
             playBtn.innerHTML = '🎵 Our Song'; 
+            toggleWave(); // Gasi animaciju talasa
         } 
-        toggleWave(); 
     });
     
     voiceBtn.addEventListener('click', () => { 
