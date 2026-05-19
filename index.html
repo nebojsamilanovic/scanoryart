@@ -771,14 +771,22 @@
     function toggleWave() { if (!song.paused || !voice.paused) { waveVisual.style.display = 'flex'; } else { waveVisual.style.display = 'none'; } }
     
     playBtn.addEventListener('click', () => { 
-        if(!voice.paused) { voice.pause(); voiceBtn.innerHTML = '🎙️ My Message'; document.body.classList.remove('focus-mode'); let parentSection = voiceBtn.closest('.section'); if(parentSection) parentSection.style.zIndex = ''; }
-        
         if (song.paused) { 
-            crackleAudio.play().catch(()=>{}); 
-            song.play(); 
-            playBtn.innerHTML = '⏸ Pause Song'; 
+            // Pokušavamo pustiti krckanje, ako telefon ne da - idemo dalje bez greške
+            if (crackleAudio) {
+                crackleAudio.play().catch(e => console.log("Crackle blocked, continuing..."));
+            }
+            
+            // Puštanje tvoje pjesme
+            song.play().then(() => {
+                playBtn.innerHTML = '⏸ Pause Song';
+            }).catch(error => {
+                alert("Molimo dodirnite ekran bilo gdje, pa pokušajte ponovo!");
+                console.log("Playback error:", error);
+            });
+            
         } else { 
-            crackleAudio.pause(); 
+            if (crackleAudio) crackleAudio.pause(); 
             song.pause(); 
             playBtn.innerHTML = '🎵 Our Song'; 
         } 
