@@ -12,7 +12,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================
@@ -23,7 +23,6 @@
       --bg-2: #e1d3c7;        
       --text: #211a14;        
       --muted: #857363;       
-      /* Tamno, luksuzno zlato */
       --accent: #a67c52;      
       --gold: #8c6a4a;        
       --card: rgba(255, 252, 248, 0.7); 
@@ -36,36 +35,19 @@
     body.is-loading { position: fixed; width: 100%; height: 100vh; overflow: hidden; }
     body { margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; color: var(--text); background-color: var(--bg); background-image: radial-gradient(circle at top, #faf7f2 0%, var(--bg) 60%, var(--bg-2) 100%); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     
-    /* TEKSTURA JE UKLONJENA */
-    
     .ambient-glow { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(166,124,82,0.15) 0%, transparent 70%); top: -200px; left: -200px; pointer-events: none; z-index: 1; }
 
-    /* ==========================================
-       ✨ VIZUELNO OŽIVLJAVANJE
-       ========================================== */
-    .gold-sweep {
-      background: linear-gradient(90deg, var(--gold) 0%, #b89771 50%, var(--gold) 100%);
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: sweep 4s linear infinite;
-      display: inline-block;
-    }
-    @keyframes sweep { to { background-position: 200% center; } }
-
-    /* ==========================================
-       🔐 LOADER & TAP TO OPEN (DODATO)
-       ========================================== */
+    /* LOADER */
     #loader { position: fixed; inset: 0; background: #0f0c0a; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #ebdaca; }
-    .loader-initials { font-family: 'Cormorant Garamond', serif; font-size: 52px; letter-spacing: 0.3em; animation: pulse 2.5s infinite alternate; font-weight: 300; text-shadow: 0 0 25px rgba(166,124,82,0.4); }
+    .loader-initials { font-family: 'Cormorant Garamond', serif; font-size: 52px; letter-spacing: 0.3em; animation: pulse 2.5s infinite alternate; font-weight: 300; text-shadow: 0 0 25px rgba(212,175,55,0.4); }
     .loader-text { margin-top: 20px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5em; opacity: 0.6; font-weight: 500; }
     
     .enter-button { margin-top: 50px; padding: 14px 35px; border: 1px solid rgba(166,124,82,0.6); border-radius: 40px; color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; background: transparent; transition: all 0.4s ease; animation: pulseBtn 2s infinite; font-weight: 500;}
     @keyframes pulseBtn { 0% { box-shadow: 0 0 0 0 rgba(166,124,82, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(166,124,82, 0); } 100% { box-shadow: 0 0 0 0 rgba(166,124,82, 0); } }
     @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.98); filter: blur(1px); } 100% { opacity: 1; transform: scale(1.02); filter: blur(0px); } }
 
-    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; margin: 0; letter-spacing: -0.01em; }
+    /* VRAĆENA ORIGINALNA TIPOGRAFIJA BEZ PRELIJEVANJA */
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; margin: 0; letter-spacing: -0.01em; color: #15100c; }
     .page { width: min(100%, 900px); margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 10; }
 
     /* HERO & TICKER */
@@ -75,7 +57,7 @@
     .hero-message { max-width: 540px; margin: 45px auto 0; font-size: clamp(18px, 4.5vw, 24px); line-height: 1.6; color: #4a3422; font-family: 'Cormorant Garamond', serif; font-style: italic; }
     
     .ticker-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 50px; }
-    .ticker-box { background: rgba(255,252,248,0.4); border: 1px solid rgba(166,124,82,0.3); border-radius: 16px; padding: 15px 20px; min-width: 80px; text-align: center; backdrop-filter: blur(15px); box-shadow: inset 0 1px 2px rgba(255,255,255,0.6), 0 10px 20px rgba(0,0,0,0.03); }
+    .ticker-box { background: rgba(255,252,248,0.5); border: 1px solid rgba(166,124,82,0.3); border-radius: 16px; padding: 15px 20px; min-width: 80px; text-align: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 1px 2px rgba(255,255,255,0.6), 0 10px 20px rgba(0,0,0,0.03); }
     .ticker-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #15100c; line-height: 1; }
     .ticker-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted); margin-top: 5px; font-weight: 600; }
 
@@ -129,11 +111,11 @@
     .timeline-content { font-size: 16px; line-height: 1.6; color: #4a3422; margin: 0; }
 
     /* BUCKET LIST */
-    .bucket-card { padding: 60px; }
+    .bucket-card { padding: 60px 30px; }
     .bucket-title { text-align: center; font-size: 42px; margin-bottom: 40px; color: #15100c; }
     .bucket-list { list-style: none; padding: 0; margin: 0 auto; max-width: 400px; }
-    .bucket-list li { display: flex; align-items: center; margin-bottom: 25px; font-size: 18px; color: #4a3422; font-weight: 400; }
-    .check-box { width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 6px; margin-right: 15px; display: flex; justify-content: center; align-items: center; transition: all 0.3s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+    .bucket-list li { display: flex; align-items: flex-start; margin-bottom: 25px; font-size: clamp(15px, 4.5vw, 18px); color: #4a3422; font-weight: 400; line-height: 1.4; }
+    .check-box { flex-shrink: 0; width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 6px; margin-right: 15px; margin-top: 2px; display: flex; justify-content: center; align-items: center; transition: all 0.3s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
     .bucket-list li.done .check-box { background: var(--accent); border-color: var(--accent); box-shadow: 0 2px 10px rgba(166,124,82,0.4); }
     .bucket-list li.done .check-box::after { content: '✓'; color: #fff; font-size: 14px; font-weight: bold; }
     .bucket-list li.done { opacity: 0.6; text-decoration: line-through; text-decoration-color: var(--accent); }
@@ -143,25 +125,16 @@
     .text-block-fullscreen h2 { margin-bottom: 28px; font-size: clamp(42px, 8.5vw, 78px); line-height: 1.05; color: #15100c; letter-spacing: -0.01em; }
     .text-block-fullscreen p { margin: 0 auto; max-width: 620px; font-size: clamp(17px, 4.5vw, 21px); line-height: 1.65; color: #4a3422; font-weight: 300; }
 
-    /* ==========================================
-       🎞️ CINEMATIC CROSSFADE GALERIJA
-       ========================================== */
-    .cinematic-gallery-container { 
-        height: 600vh; /* Zavisno od broja slika (5 slika = 600vh) */
-        width: 100vw; 
-        margin-left: calc(-50vw + 50%); 
-        position: relative; 
-        background: #0f0c0a;
-    }
-    .gallery-sticky { position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center;}
-    .gallery-img { position: absolute; inset: 0; opacity: 0; transform: scale(1.1); will-change: transform, opacity; }
-    .gallery-img.active { opacity: 1; transform: scale(1); }
-    .gallery-img img { width: 100%; height: 100%; object-fit: cover; }
-    .gallery-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.6) 100%); z-index: 100; pointer-events: none;}
+    /* STACKING GALERIJA */
+    .stacking-gallery { display: flex; flex-direction: column; align-items: center; position: relative; padding-top: 10vh; padding-bottom: 60vh; }
+    .stacking-item { position: sticky; top: 12vh; height: 76vh; width: 85vw; max-width: 550px; margin-bottom: 70vh; background: var(--card); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: var(--radius); box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); padding: 16px; transform-origin: center top; will-change: transform, opacity; }
+    .stacking-item:last-child { margin-bottom: 0; }
+    .stacking-item .image-wrapper { width: 100%; height: 100%; border-radius: 20px; overflow: hidden; position: relative;}
+    .stacking-item .image-wrapper img { width: 100%; height: 120%; position: absolute; top: -10%; left: 0; object-fit: cover; will-change: transform; }
 
     /* HOLD TO REVEAL */
     .hold-container { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y; transition: box-shadow 0.6s ease; }
-    .hold-image { width: 100%; height: 100%; object-fit: cover; filter: blur(35px) grayscale(50%); transform: scale(1.1); transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1); will-change: filter, transform; pointer-events: none; }
+    .hold-image { width: 100%; height: 100%; object-fit: cover; filter: blur(25px) grayscale(50%); transform: scale(1.1); transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1); pointer-events: none; }
     .hold-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(243, 234, 225, 0.3); transition: opacity 0.5s ease; pointer-events: none; }
     .finger-icon { font-size: 50px; animation: pulseFinger 2s infinite; margin-bottom: 15px; }
     @keyframes pulseFinger { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 10px rgba(255,255,255,0.8)); } }
@@ -191,10 +164,10 @@
     .flip-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
     .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
     .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-shadow: var(--shadow); }
-    .flip-front { background: var(--card); border: 1px solid rgba(255,255,255,0.6); backdrop-filter: blur(25px); box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); }
-    .flip-front .number { font-family: 'Cormorant Garamond', serif; font-size: 65px; opacity: 0.8; color: var(--gold); }
-    .flip-back { background: var(--gold); color: var(--text); transform: rotateY(180deg); border: 1px solid rgba(166,124,82,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.5); }
-    .flip-back p { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 15px; color: var(--text); line-height: 1.5; margin: 0; }
+    .flip-front { background: var(--card); border: 1px solid rgba(255,255,255,0.6); backdrop-filter: blur(15px); box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); }
+    .flip-front .number { font-family: 'Cormorant Garamond', serif; font-size: 65px; color: #15100c; opacity: 0.8; }
+    .flip-back { background: #15100c; color: #eedfcc; transform: rotateY(180deg); border: 1px solid rgba(166,124,82,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.5); }
+    .flip-back p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; line-height: 1.5; margin: 0; }
 
     /* SCRATCH REVEAL */
     .scratch-container { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); touch-action: pan-y; }
@@ -233,6 +206,9 @@
     .final { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
     .final h2 { font-size: clamp(55px, 13vw, 115px); font-style: italic; line-height: 0.95; }
     .signature { margin-top: 60px; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    
+    .shake-hint { margin-top: 30px; font-size: 9px; letter-spacing: 0.15em; color: rgba(133, 115, 99, 0.5); cursor: pointer; text-transform: uppercase; padding: 10px; border: 1px solid rgba(133, 115, 99, 0.3); border-radius: 20px; transition: all 0.3s;}
+    .shake-hint:hover { background: rgba(133, 115, 99, 0.1); }
 
     /* POP-UPS OVERLAYS */
     .fullscreen-overlay { display: none; position: fixed; inset: 0; background: rgba(10, 15, 25, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 999999; justify-content: center; align-items: center; padding: 20px; animation: fadeInPop 1s ease forwards; }
@@ -241,6 +217,10 @@
     .close-pop:hover { color: #c39b7d; }
     @keyframes fadeInPop { from { opacity: 0; } to { opacity: 1; } }
     @keyframes popUpAnim { from { opacity: 0; transform: translateY(40px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    /* SHAKE CONFETTI */
+    #confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 999990; overflow: hidden; }
+    .confetti { position: absolute; width: 10px; height: 10px; background-color: var(--gold); opacity: 0; box-shadow: 0 0 5px rgba(212,175,55,0.5); }
 
     /* TYPEWRITER EFEKAT */
     #typewriterText { min-height: 40px; }
@@ -260,10 +240,13 @@
 
   <div id="nightOverlay" class="fullscreen-overlay"><div class="pop-box"><div class="close-pop" onclick="this.parentElement.parentElement.style.display='none'">✕</div>I knew you couldn't sleep.<br>Goodnight my love, see you in the morning. ✨</div></div>
   <div id="batteryOverlay" class="fullscreen-overlay"><div class="pop-box"><div class="close-pop" onclick="this.parentElement.parentElement.style.display='none'">✕</div>I see your battery is running low.<br>Don't worry... my love for you is never on empty. 🔋❤️</div></div>
+  <div id="shakeOverlay" class="fullscreen-overlay"><div class="pop-box"><div class="close-pop" onclick="this.parentElement.parentElement.style.display='none'">✕</div>Whenever you need a reason to smile, I'll be here. I love you! ✨</div></div>
   <div id="anniversaryOverlay" class="fullscreen-overlay" style="background: rgba(166, 124, 82, 0.15);"><div class="pop-box" style="border-color: var(--gold); box-shadow: 0 0 50px rgba(166,124,82,0.2), inset 0 1px 1px rgba(255,255,255,0.05);"><div class="close-pop" onclick="this.parentElement.parentElement.style.display='none'">✕</div>Happy Anniversary!<br><span style="font-size:18px; color:#9a8a7a;">Another year has passed, and I love you more than the first day. 🥂</span></div></div>
 
+  <div id="confetti-container"></div>
+
   <div id="loader">
-    <div class="loader-initials gold-sweep">M & A</div>
+    <div class="loader-initials">M & A</div>
     <div class="loader-text" id="loaderText">Unlocking memories</div>
     <button class="enter-button" id="enterBtn" style="display: none;">Tap to Open</button>
   </div>
@@ -275,7 +258,7 @@
     <section class="hero">
       <div class="hero-content">
         <div class="eyebrow">A hidden memory</div>
-        <h1 class="gold-sweep">For Ana</h1>
+        <h1>For Ana</h1>
         <p class="hero-message">A little piece of us, saved here for the days when you need to smile.</p>
         
         <div class="ticker-container gs-reveal">
@@ -294,7 +277,7 @@
         <div class="photo-card-inner">
           <div class="photo-front">
              <div class="image-wrapper" id="zoomWrapper">
-               <img id="depthImage" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80" alt="Memory" />
+               <img id="depthImage" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy" />
              </div>
           </div>
           <div class="photo-back">
@@ -316,7 +299,7 @@
       <div class="star-map-fullscreen">
         <div class="stars-overlay"></div>
         <div class="star-map-content">
-          <h2 class="gold-sweep">Under these stars,<br>it all began.</h2>
+          <h2>Under these stars,<br>it all began.</h2>
           <p>Banja Luka — February 14, 2022</p>
         </div>
       </div>
@@ -337,7 +320,7 @@
         <h2>Touch of a Memory</h2>
       </div>
       <div class="hold-container" id="holdContainer" oncontextmenu="return false;">
-        <img class="hold-image" src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80" alt="Hidden Memory" />
+        <img class="hold-image" src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80" alt="Hidden Memory" loading="lazy" />
         <div class="hold-overlay">
           <div class="finger-icon">👆</div>
           <div class="hold-text">Rest your finger here & imagine my hand in yours</div>
@@ -360,7 +343,7 @@
         <h2>Secret Moment</h2>
       </div>
       <div class="scratch-container">
-        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="Secret Memory" />
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="Secret Memory" loading="lazy" />
         <div class="scratch-hint" id="scratchHint">Swipe across the gold to reveal</div>
         <canvas id="scratchCanvas"></canvas>
       </div>
@@ -387,15 +370,17 @@
       </div>
     </section>
 
-    <section class="cinematic-gallery-container">
-      <div class="gallery-sticky">
-        <div class="gallery-img active" style="z-index: 1;"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
-        <div class="gallery-img" style="z-index: 2;"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
-        <div class="gallery-img" style="z-index: 3;"><img src="https://images.unsplash.com/photo-1501901609772-df0848060b33?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
-        <div class="gallery-img" style="z-index: 4;"><img src="https://images.unsplash.com/photo-1474552226712-ac0f0d61cb24?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
-        <div class="gallery-img" style="z-index: 5;"><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
-        <div class="gallery-overlay"></div>
-      </div>
+    <section class="section stacking-gallery">
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy" /></div></div>
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Memory" loading="lazy" /></div></div>
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1501901609772-df0848060b33?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1474552226712-ac0f0d61cb24?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy" /></div></div>
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1518104593124-ac2e82a5eb9d?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
+      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1515405820464-904323af2423?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
     </section>
 
     <div id="focus-overlay"></div>
@@ -407,19 +392,19 @@
       <div class="flip-grid">
         <div class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-inner">
-            <div class="flip-front"><div class="number gold-sweep">1</div><p style="margin-top:10px; font-weight:500; text-transform:uppercase; font-size:11px; letter-spacing:0.1em;">Tap to open</p></div>
+            <div class="flip-front"><div class="number">1</div><p style="margin-top:10px; font-weight:500; text-transform:uppercase; font-size:11px; letter-spacing:0.1em;">Tap to open</p></div>
             <div class="flip-back"><p>The way your nose crinkles when you laugh at my terrible jokes.</p></div>
           </div>
         </div>
         <div class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-inner">
-            <div class="flip-front"><div class="number gold-sweep">2</div><p style="margin-top:10px; font-weight:500; text-transform:uppercase; font-size:11px; letter-spacing:0.1em;">Tap to open</p></div>
+            <div class="flip-front"><div class="number">2</div><p style="margin-top:10px; font-weight:500; text-transform:uppercase; font-size:11px; letter-spacing:0.1em;">Tap to open</p></div>
             <div class="flip-back"><p>How you always leave exactly one sip of coffee in your mug.</p></div>
           </div>
         </div>
         <div class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-inner">
-            <div class="flip-front"><div class="number gold-sweep">3</div><p style="margin-top:10px; font-weight:500; text-transform:uppercase; font-size:11px; letter-spacing:0.1em;">Tap to open</p></div>
+            <div class="flip-front"><div class="number">3</div><p style="margin-top:10px; font-weight:500; text-transform:uppercase; font-size:11px; letter-spacing:0.1em;">Tap to open</p></div>
             <div class="flip-back"><p>That you make me feel like I am finally home.</p></div>
           </div>
         </div>
@@ -428,14 +413,14 @@
 
     <section class="section gs-reveal">
       <div class="text-block" style="padding-bottom: 30px;">
-        <h2 class="gold-sweep">Unlock My Heart</h2>
+        <h2>Unlock My Heart</h2>
       </div>
       <div class="draw-heart-wrapper" id="dhWrapper" oncontextmenu="return false;">
         <div class="dh-hint" id="dhHintText">Trace the screen to unlock</div>
         <div class="dh-icon"><svg viewBox="0 0 32 29.6"><path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg></div>
         <canvas id="dhCanvas"></canvas>
         <div class="dh-reveal">
-          <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=800&q=80" alt="Unlocked" />
+          <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=800&q=80" alt="Unlocked" loading="lazy" />
         </div>
       </div>
     </section>
@@ -470,7 +455,7 @@
         </div>
         <div class="lock-overlay">
           <div class="lock-icon">🔒</div>
-          <div class="lock-text gold-sweep">Locked Memory</div>
+          <div class="lock-text">Locked Memory</div>
           <div class="lock-date">Unlocks on Feb 14, 2030</div>
         </div>
       </div>
@@ -481,6 +466,7 @@
       <p id="typewriterText" data-text="In every version of this life...^I'd choose you." style="font-family: 'Cormorant Garamond'; font-size: 26px; font-style: italic; margin-top:25px; color: #4a3422;"></p>
       
       <div class="signature">With love, Marko</div>
+      <div class="shake-hint" onclick="requestShakePermission()">Shake the phone for a smile</div>
     </section>
 
   </main>
@@ -495,7 +481,7 @@
     gsap.registerPlugin(ScrollTrigger);
 
     // ==========================================
-    // 🔐 LOADER & AUDIO UNLOCK (VRAĆENO)
+    // 🔐 LOADER & AUDIO UNLOCK
     // ==========================================
     const today = new Date();
     let isAnniversary = false; 
@@ -503,17 +489,18 @@
     const hour = today.getHours();
     let isNight = (hour >= 22 || hour <= 5);
 
+    let hasShaken = false;
+
     window.addEventListener('load', () => {
       window.scrollTo(0, 0); 
       
-      // Umjesto da loader sam nestane, pokazujemo dugme za Audio Unlock
       setTimeout(() => {
           document.getElementById('loaderText').style.display = 'none';
           document.getElementById('enterBtn').style.display = 'block';
-      }, 1500); // Loader se vrti 1.5 sekundu prije dugmeta
+      }, 1500);
       
       document.getElementById('enterBtn').addEventListener('click', () => {
-          // Audio Unlock Trick (Mora na click!)
+          // Audio Unlock
           const song = document.getElementById('song');
           const voice = document.getElementById('voice');
           const crackle = document.getElementById('crackleAudio');
@@ -522,7 +509,7 @@
           if(voice.src && voice.src !== window.location.href) voice.play().then(()=>voice.pause()).catch(()=>{});
           crackle.play().then(()=>crackle.pause()).catch(()=>{});
 
-          // Pokrećemo brisanje loadera
+          // Otvaranje sajta
           const tl = gsap.timeline({ 
             onComplete: () => { 
                 document.body.classList.remove('is-loading'); ScrollTrigger.refresh(); 
@@ -536,49 +523,41 @@
     });
 
     // ==========================================
-    // ✨ GSAP PRELIJEVANJA (ISPEGLANO)
+    // ✨ GSAP ANIMACIJE I PRELIJEVANJA
     // ==========================================
     const revealElements = document.querySelectorAll(".gs-reveal");
     revealElements.forEach((el) => { 
-      if(el.id !== 'depthSection' && el.id !== 'secretTapCard' && !el.closest('.hero') && !el.closest('.waterfall-item')) { 
+      if(el.id !== 'depthSection' && el.id !== 'secretTapCard' && !el.closest('.hero')) { 
         gsap.fromTo(el, 
-          { y: 80, opacity: 0, scale: 0.98, filter: "blur(8px)" }, 
-          { y: 0, opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.4, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none reverse" } }
+          { y: 60, opacity: 0, scale: 0.98 }, 
+          { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" } }
         ); 
       } 
     });
 
-    gsap.to(document.documentElement, { "--bg": "#ebd5c1", "--bg-2": "#d6c1b0", ease: "none", scrollTrigger: { trigger: ".time-capsule-card", start: "top 90%", end: "bottom bottom", scrub: 1 } });
+    gsap.to(document.documentElement, { "--bg": "#ebd5c1", "--bg-2": "#d6c1b0", ease: "none", scrollTrigger: { trigger: ".time-capsule-card", start: "top 90%", end: "bottom bottom", scrub: true } });
 
+    // ✨ GLATKI TIMELINE
     const timelineItems = document.querySelectorAll('.timeline-item');
     timelineItems.forEach((item, index) => { 
-        gsap.fromTo(item, {x: (index % 2 === 0 ? -30 : 30), opacity: 0, filter: 'blur(5px)'}, {x: 0, opacity: 1, filter: 'blur(0px)', scrollTrigger: { trigger: item, start: 'top 85%', toggleActions: 'play none none reverse'}});
+        gsap.fromTo(item, {x: (index % 2 === 0 ? -30 : 30), opacity: 0 }, {x: 0, opacity: 1, duration: 0.8, scrollTrigger: { trigger: item, start: 'top 85%', toggleActions: 'play none none reverse'}});
         ScrollTrigger.create({ trigger: item, start: "top 70%", onEnter: () => item.classList.add('active'), onLeaveBack: () => item.classList.remove('active') }); 
     });
-    gsap.to("#tLine", { height: "100%", ease: "none", scrollTrigger: { trigger: "#loveTimeline", start: "top 70%", end: "bottom 70%", scrub: 1 } });
+    gsap.to("#tLine", { height: "100%", ease: "none", scrollTrigger: { trigger: "#loveTimeline", start: "top 70%", end: "bottom 70%", scrub: true } });
 
-    // ==========================================
-    // 🎞️ CINEMATIC CROSSFADE (VRAĆENO)
-    // ==========================================
-    const allGalleryImgs = gsap.utils.toArray('.gallery-img');
-    let galTl = gsap.timeline({
-        scrollTrigger: { trigger: ".cinematic-gallery-container", start: "top top", end: "bottom bottom", scrub: 1 }
+    // ✨ GLATKA GALERIJA
+    const cards = document.querySelectorAll('.stacking-item');
+    cards.forEach((card, i) => { 
+        let img = card.querySelector('img');
+        gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true } });
+        if (i < cards.length - 1) { 
+            gsap.to(card, { scale: 0.9, opacity: 0, yPercent: -10, ease: "none", scrollTrigger: { trigger: cards[i + 1], start: "top 95%", end: "top 25%", scrub: true } }); 
+        } 
     });
 
-    allGalleryImgs.forEach((img, i) => {
-        if(i === 0) {
-            // Prva slika polako raste dok se sljedeća ne preklopi
-            galTl.to(img, { scale: 1.05, duration: 1, ease: "none" }, 0);
-        } else {
-            // Naredna slika se mekano pojavljuje (Crossfade)
-            galTl.to(img, { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, i - 0.5);
-            // Zatim i ona nastavlja da polako raste za efekat disanja
-            if(i !== allGalleryImgs.length - 1) {
-                galTl.to(img, { scale: 1.05, duration: 1, ease: "none" }, i + 0.5);
-            }
-        }
-    });
-
+    // ==========================================
+    // 🔋 BATERIJA
+    // ==========================================
     if ('getBattery' in navigator) {
       navigator.getBattery().then(function(battery) {
         if (battery.level <= 0.15 && !battery.charging) {
@@ -587,6 +566,7 @@
       });
     }
 
+    // TICKER
     const startDate = new Date('2022-02-14T00:00:00').getTime();
     function updateTicker() {
       const diff = new Date().getTime() - startDate;
@@ -602,9 +582,44 @@
     let tapCount = 0; let tapTimer;
     document.getElementById('secretTapCard').addEventListener('click', function() {
         tapCount++; clearTimeout(tapTimer);
-        if (tapCount >= 3) { this.classList.add('secret-flipped'); tapCount = 0; } 
+        if (tapCount >= 3) { this.classList.add('secret-flipped'); fireConfetti(); tapCount = 0; } 
         else { tapTimer = setTimeout(() => { tapCount = 0; }, 800); }
     });
+
+    // ==========================================
+    // 📳 SHAKE EFEKAT
+    // ==========================================
+    let lastX = null, lastY = null, lastZ = null; let shakeThreshold = 20; 
+    function devicemotionHandler(event) {
+        if (hasShaken) return;
+        let acc = event.accelerationIncludingGravity; if (!acc) return;
+        if (lastX !== null) {
+            let deltaX = Math.abs(lastX - acc.x); let deltaY = Math.abs(lastY - acc.y); let deltaZ = Math.abs(lastZ - acc.z);
+            if (deltaX + deltaY + deltaZ > shakeThreshold) {
+                hasShaken = true;
+                document.getElementById('shakeOverlay').style.display = 'flex'; fireConfetti();
+                window.removeEventListener('devicemotion', devicemotionHandler); 
+            }
+        }
+        lastX = acc.x; lastY = acc.y; lastZ = acc.z;
+    }
+    window.addEventListener('devicemotion', devicemotionHandler, false);
+
+    function requestShakePermission() {
+        if (!hasShaken) {
+            if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                DeviceMotionEvent.requestPermission().then(permissionState => { if (permissionState === 'granted') { window.addEventListener('devicemotion', devicemotionHandler); } }).catch(console.error);
+            } else { document.getElementById('shakeOverlay').style.display = 'flex'; fireConfetti(); hasShaken = true; }
+        }
+    }
+
+    function fireConfetti() {
+        const container = document.getElementById('confetti-container');
+        for (let i = 0; i < 60; i++) {
+            let conf = document.createElement('div'); conf.className = 'confetti'; conf.style.left = Math.random() * 100 + 'vw'; conf.style.backgroundColor = Math.random() > 0.5 ? '#d4af37' : '#c39b7d';
+            container.appendChild(conf); gsap.to(conf, { y: window.innerHeight + 20, rotation: Math.random() * 360, duration: Math.random() * 2 + 1.5, opacity: 1, ease: "power1.out", onComplete: () => conf.remove() });
+        }
+    }
 
     const holdContainer = document.getElementById('holdContainer');
     let heartbeatInterval;
@@ -633,7 +648,7 @@
         if(!isDrawingHeart) return; dhHint.style.opacity = 0; dhCtx.lineTo(x, y); dhCtx.stroke();
         if(lastDhX !== undefined) { distanceDrawn += Math.sqrt(Math.pow(x - lastDhX, 2) + Math.pow(y - lastDhY, 2)); }
         lastDhX = x; lastDhY = y;
-        if(distanceDrawn > 1000 && !dhWrapper.classList.contains('unlocked')) { dhWrapper.classList.add('unlocked'); }
+        if(distanceDrawn > 1000 && !dhWrapper.classList.contains('unlocked')) { dhWrapper.classList.add('unlocked'); fireConfetti(); }
     }
     function startDh(e) { 
         if(e) e.preventDefault(); isDrawingHeart = true; const rect = dhCanvas.getBoundingClientRect();
@@ -680,6 +695,10 @@
             let parentSection = c.closest('.section');
             if(parentSection) parentSection.style.zIndex = '';
         });
+        if(!voice.paused) {
+            voice.pause(); voiceBtn.innerHTML = '🎙️ My Message'; toggleWave();
+            let parentSection = voiceBtn.closest('.section'); if(parentSection) parentSection.style.zIndex = '';
+        }
         document.body.classList.remove('focus-mode');
     });
 
