@@ -849,6 +849,9 @@
     }
     ScrollTrigger.create({ trigger: ".final", start: "top 60%", onEnter: () => { if(twIndex === 0) typeWriter(); } });
 
+    // Čelična kočnica - čim se skripta učita, pjesma se nasilno pauzira u memoriji
+    document.getElementById('song').pause();
+
   </script>
 </body>
 </html>
