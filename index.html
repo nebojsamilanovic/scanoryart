@@ -37,14 +37,16 @@
     
     .ambient-glow { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(166,124,82,0.15) 0%, transparent 70%); top: -200px; left: -200px; pointer-events: none; z-index: 1; }
 
-    /* LOADER */
+    /* ==========================================
+       🔐 LOADER & TAP TO ENTER
+       ========================================== */
     #loader { position: fixed; inset: 0; background: #0f0c0a; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #ebdaca; }
-    .loader-initials { font-family: 'Cormorant Garamond', serif; font-size: 52px; letter-spacing: 0.3em; animation: pulse 2.5s infinite alternate; font-weight: 300; text-shadow: 0 0 25px rgba(212,175,55,0.4); }
+    .loader-initials { font-family: 'Cormorant Garamond', serif; font-size: 52px; letter-spacing: 0.3em; animation: pulse 2.5s infinite alternate; font-weight: 300; text-shadow: 0 0 25px rgba(166,124,82,0.4); color: var(--gold); }
     .loader-text { margin-top: 20px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5em; opacity: 0.6; font-weight: 500; }
     
     .enter-button { margin-top: 50px; padding: 14px 35px; border: 1px solid rgba(166,124,82,0.6); border-radius: 40px; color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; background: transparent; transition: all 0.4s ease; animation: pulseBtn 2s infinite; font-weight: 500;}
     @keyframes pulseBtn { 0% { box-shadow: 0 0 0 0 rgba(166,124,82, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(166,124,82, 0); } 100% { box-shadow: 0 0 0 0 rgba(166,124,82, 0); } }
-    @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.98); filter: blur(1px); } 100% { opacity: 1; transform: scale(1.02); filter: blur(0px); } }
+    @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.98); } 100% { opacity: 1; transform: scale(1.02); } }
 
     /* VRAĆENA ORIGINALNA TIPOGRAFIJA BEZ PRELIJEVANJA */
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; margin: 0; letter-spacing: -0.01em; color: #15100c; }
@@ -61,7 +63,7 @@
     .ticker-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #15100c; line-height: 1; }
     .ticker-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted); margin-top: 5px; font-weight: 600; }
 
-    .section { padding: 100px 0; display: grid; align-items: center; transition: z-index 0.3s ease; position: relative; will-change: transform, opacity, filter;}
+    .section { padding: 100px 0; display: grid; align-items: center; transition: z-index 0.3s ease; position: relative; will-change: transform, opacity;}
     .card { background: var(--card); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: var(--radius); box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); overflow: hidden; }
     
     /* SECRET TAP IMAGE */
@@ -75,16 +77,55 @@
     .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
     .caption { color: var(--muted); font-size: 12px; letter-spacing: 0.15em; padding: 20px 8px 4px; text-align: center; text-transform: uppercase; font-weight: 500; }
     
-    /* KINEMATOGRAFSKI MJESEC U POZADINI */
+    /* ==========================================
+       🌌 NOVO PLAVO POKRETNO NEBO (Promijenjeno)
+       ========================================== */
     .star-map-fullscreen { 
         width: 100vw; 
         margin-left: calc(-50vw + 50%); 
         height: 100vh; 
-        background: radial-gradient(circle at 70% 30%, #4a3422 0%, #15100c 80%, #050403 100%);
+        /* Radial BLUE SKY GRADIENT - New */
+        background: radial-gradient(ellipse at center, #1e3a8a 0%, #0c1a40 100%); 
         color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; box-shadow: inset 0 0 100px rgba(0,0,0,0.8); padding: 0 20px; 
     }
-    .star-map-fullscreen::before { content:''; position:absolute; top:30%; right:15%; width:40vw; height:40vw; background: radial-gradient(circle, #b89771 0%, rgba(166,124,82,0.2) 50%, rgba(166,124,82,0) 70%); border-radius:50%; filter: blur(35px); mix-blend-mode: color-dodge; opacity: 0.7;}
-    .stars-overlay { position: absolute; inset: 0; background: rgba(5, 4, 3, 0.4); z-index: 1; }
+
+    /* Blagi 'glow' prilagođen plavom nebu */
+    .star-map-fullscreen::before { content:''; position:absolute; top:30%; right:15%; width:40vw; height:40vw; background: radial-gradient(circle, #fff 0%, rgba(255,255,255,0.2) 50%, transparent 70%); border-radius:50%; filter: blur(35px); mix-blend-mode: color-dodge; opacity: 0.4;}
+    
+    /* Kontejner za zvijezde */
+    .stars-overlay { 
+        position: absolute; 
+        inset: 0; 
+        background: transparent; /* Remove old solid overlay */
+        z-index: 1; 
+        overflow: hidden; /* Added overflow for animation */
+    }
+
+    /* Seamless Box-Shadow Moving Stars trick */
+    .stars-overlay::before, .stars-overlay::after {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        background: transparent;
+        /* Generated shadow list for visibility and coverage */
+        box-shadow: 768px 104px #fff, 122px 28px #fff, 439px 571px #fff, 1102px 1761px #fff, 950px 1321px #fff, 1511px 40px #fff, 290px 1480px #fff, 1601px 880px #fff, 140px 1602px #fff, 1888px 231px #fff, 105px 1982px #fff, 1470px 352px #fff, 555px 1120px #fff, 1210px 720px #fff, 1999px 80px #fff, 360px 1490px #fff, 1702px 612px #fff, 666px 1333px #fff, 1199px 111px #fff, 831px 1952px #fff, 150px 1500px #fff, 1800px 1800px #fff, 900px 900px #fff, 250px 250px #fff, 1600px 300px #fff, 400px 1600px #fff, 100px 100px #fff, 1900px 1900px #fff, 500px 500px #fff, 1750px 750px #fff, 1250px 1250px #fff, 750px 1750px #fff, 60px 1900px #fff, 1900px 60px #fff;
+        animation: animStar 50s linear infinite;
+    }
+
+    /* Seamless looping copy */
+    .stars-overlay::after {
+        top: 2000px; /* Offset matching animation height */
+    }
+
+    /* Animation for moving up */
+    @keyframes animStar {
+        from { transform: translateY(0); }
+        to { transform: translateY(-2000px); }
+    }
+
     .star-map-content { position: relative; z-index: 2; }
     .star-map-content h2 { color: #eedfcc; margin-bottom: 18px; font-size: clamp(40px, 8vw, 80px); text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
     .star-map-content p { color: rgba(255,255,255,0.7); font-size: 14px; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
@@ -101,7 +142,7 @@
     .timeline { position: relative; padding: 40px 0; max-width: 600px; margin: 0 auto; }
     .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: rgba(133, 115, 99, 0.15); }
     .timeline-progress { position: absolute; left: 20px; top: 0; width: 1px; background: var(--accent); height: 0; transition: height 0.1s linear; }
-    .timeline-item { position: relative; padding-left: 55px; margin-bottom: 60px; will-change: transform, opacity; transition: all 0.5s ease;}
+    .timeline-item { position: relative; padding-left: 55px; margin-bottom: 60px; opacity: 0; transform: translateY(30px); transition: all 0.5s ease;}
     .timeline-item:last-child { margin-bottom: 0; }
     .timeline-dot { position: absolute; left: 15px; top: 8px; width: 11px; height: 11px; background: var(--bg); border: 2px solid rgba(133, 115, 99, 0.4); border-radius: 50%; transition: all 0.5s ease; }
     .timeline-item.active .timeline-dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 15px rgba(166,124,82,0.6); transform: scale(1.3); }
@@ -125,12 +166,32 @@
     .text-block-fullscreen h2 { margin-bottom: 28px; font-size: clamp(42px, 8.5vw, 78px); line-height: 1.05; color: #15100c; letter-spacing: -0.01em; }
     .text-block-fullscreen p { margin: 0 auto; max-width: 620px; font-size: clamp(17px, 4.5vw, 21px); line-height: 1.65; color: #4a3422; font-weight: 300; }
 
-    /* STACKING GALERIJA */
-    .stacking-gallery { display: flex; flex-direction: column; align-items: center; position: relative; padding-top: 10vh; padding-bottom: 60vh; }
-    .stacking-item { position: sticky; top: 12vh; height: 76vh; width: 85vw; max-width: 550px; margin-bottom: 70vh; background: var(--card); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: var(--radius); box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); padding: 16px; transform-origin: center top; will-change: transform, opacity; }
-    .stacking-item:last-child { margin-bottom: 0; }
-    .stacking-item .image-wrapper { width: 100%; height: 100%; border-radius: 20px; overflow: hidden; position: relative;}
-    .stacking-item .image-wrapper img { width: 100%; height: 120%; position: absolute; top: -10%; left: 0; object-fit: cover; will-change: transform; }
+    /* ==========================================
+       🎞️ CINEMATIC CROSSFADE GALERIJA (BEZ CROP-A!)
+       ========================================== */
+    .cinematic-gallery-container { 
+        height: 1000vh; /* Zavisno od broja slika daje prostora za dug, fluidan skrol */
+        width: 100vw; 
+        margin-left: calc(-50vw + 50%); 
+        position: relative; 
+        background: #050403; /* Kino mrak da slike dišu */
+    }
+    .gallery-sticky { position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    
+    .gallery-img { position: absolute; inset: 0; opacity: 0; transform: scale(1.05); display: flex; align-items: center; justify-content: center; padding: 20px; will-change: transform, opacity; }
+    .gallery-img.active { opacity: 1; transform: scale(1); }
+    
+    /* SLIKE SE NE SIJEKU! Zadržavaju originalni format uz blago zaobljene ivice */
+    .gallery-img img { 
+        max-width: 100%; 
+        max-height: 100%; 
+        object-fit: contain; 
+        border-radius: 16px; 
+        box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    }
+    
+    /* Blaga filmska vinjeta preko svega za premium fade efekat */
+    .gallery-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.8) 100%); z-index: 100; pointer-events: none;}
 
     /* HOLD TO REVEAL */
     .hold-container { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y; transition: box-shadow 0.6s ease; }
@@ -206,7 +267,6 @@
     .final { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
     .final h2 { font-size: clamp(55px, 13vw, 115px); font-style: italic; line-height: 0.95; }
     .signature { margin-top: 60px; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-    
     .shake-hint { margin-top: 30px; font-size: 9px; letter-spacing: 0.15em; color: rgba(133, 115, 99, 0.5); cursor: pointer; text-transform: uppercase; padding: 10px; border: 1px solid rgba(133, 115, 99, 0.3); border-radius: 20px; transition: all 0.3s;}
     .shake-hint:hover { background: rgba(133, 115, 99, 0.1); }
 
@@ -236,7 +296,7 @@
 </head>
 <body class="is-loading">
 
-  <audio id="crackleAudio" src="https://assets.mixkit.co/active_storage/sfx/2658/2658-preview.mp3" preload="auto" loop></audio>
+  <audio id="crackleAudio" src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" preload="auto" loop></audio>
 
   <div id="nightOverlay" class="fullscreen-overlay"><div class="pop-box"><div class="close-pop" onclick="this.parentElement.parentElement.style.display='none'">✕</div>I knew you couldn't sleep.<br>Goodnight my love, see you in the morning. ✨</div></div>
   <div id="batteryOverlay" class="fullscreen-overlay"><div class="pop-box"><div class="close-pop" onclick="this.parentElement.parentElement.style.display='none'">✕</div>I see your battery is running low.<br>Don't worry... my love for you is never on empty. 🔋❤️</div></div>
@@ -269,7 +329,6 @@
           <div class="ticker-box"><div class="ticker-num" id="t-mins">0</div><div class="ticker-label">Mins</div></div>
           <div class="ticker-box" style="background: rgba(166,124,82,0.15); border-color: rgba(166,124,82,0.6);"><div class="ticker-num" id="t-secs" style="color: var(--accent);">0</div><div class="ticker-label">Secs</div></div>
         </div>
-      </div>
     </section>
 
     <section class="section split" id="depthSection">
@@ -297,7 +356,7 @@
 
     <section class="section gs-reveal" style="padding: 0;">
       <div class="star-map-fullscreen">
-        <div class="stars-overlay"></div>
+        <div class="stars-overlay gs-reveal"></div>
         <div class="star-map-content">
           <h2>Under these stars,<br>it all began.</h2>
           <p>Banja Luka — February 14, 2022</p>
@@ -370,17 +429,19 @@
       </div>
     </section>
 
-    <section class="section stacking-gallery">
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy" /></div></div>
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Memory" loading="lazy" /></div></div>
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1501901609772-df0848060b33?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1474552226712-ac0f0d61cb24?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy" /></div></div>
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1518104593124-ac2e82a5eb9d?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
-      <div class="stacking-item"><div class="image-wrapper"><img src="https://images.unsplash.com/photo-1515405820464-904323af2423?auto=format&fit=crop&w=1000&q=80" alt="Memory" loading="lazy" /></div></div>
+    <section class="cinematic-gallery-container">
+      <div class="gallery-sticky">
+        <div class="gallery-img active" style="z-index: 1;"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
+        <div class="gallery-img" style="z-index: 2;"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
+        <div class="gallery-img" style="z-index: 3;"><img src="https://images.unsplash.com/photo-1501901609772-df0848060b33?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
+        <div class="gallery-img" style="z-index: 4;"><img src="https://images.unsplash.com/photo-1474552226712-ac0f0d61cb24?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
+        <div class="gallery-img" style="z-index: 5;"><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
+        <div class="gallery-img" style="z-index: 6;"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
+        <div class="gallery-img" style="z-index: 7;"><img src="https://images.unsplash.com/photo-1518104593124-ac2e82a5eb9d?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
+        <div class="gallery-img" style="z-index: 8;"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
+        <div class="gallery-img" style="z-index: 9;"><img src="https://images.unsplash.com/photo-1515405820464-904323af2423?auto=format&fit=crop&w=1200&q=80" alt="Memory" loading="lazy"/></div>
+        <div class="gallery-overlay"></div>
+      </div>
     </section>
 
     <div id="focus-overlay"></div>
@@ -481,7 +542,7 @@
     gsap.registerPlugin(ScrollTrigger);
 
     // ==========================================
-    // 🔐 LOADER & AUDIO UNLOCK
+    // 🔐 LOADER & SIGURAN AUDIO UNLOCK 
     // ==========================================
     const today = new Date();
     let isAnniversary = false; 
@@ -497,19 +558,10 @@
       setTimeout(() => {
           document.getElementById('loaderText').style.display = 'none';
           document.getElementById('enterBtn').style.display = 'block';
-      }, 1500);
+      }, 1500); 
       
-      document.getElementById('enterBtn').addEventListener('click', () => {
-          // Audio Unlock
-          const song = document.getElementById('song');
-          const voice = document.getElementById('voice');
-          const crackle = document.getElementById('crackleAudio');
-          
-          if(song.src && song.src !== window.location.href) song.play().then(()=>song.pause()).catch(()=>{});
-          if(voice.src && voice.src !== window.location.href) voice.play().then(()=>voice.pause()).catch(()=>{});
-          crackle.play().then(()=>crackle.pause()).catch(()=>{});
-
-          // Otvaranje sajta
+      document.getElementById('enterBtn').addEventListener('click', function() {
+          // ODMAH uklanjamo loader, bez obzira na greške u senzorima
           const tl = gsap.timeline({ 
             onComplete: () => { 
                 document.body.classList.remove('is-loading'); ScrollTrigger.refresh(); 
@@ -517,8 +569,29 @@
                 else if(isNight) { document.getElementById('nightOverlay').style.display = 'flex'; }
             } 
           });
-          tl.to("#loader", { yPercent: -100, duration: 1.4, ease: "power4.inOut" })
-            .from(".hero-content", { y: 60, opacity: 0, filter: "blur(10px)", duration: 1.6, ease: "power3.out" }, "-=0.6");
+          tl.to("#loader", { yPercent: -100, duration: 1.2, ease: "power4.inOut" })
+            .from(".hero-content", { y: 40, opacity: 0, duration: 1.2, ease: "power2.out" }, "-=0.6");
+
+          // Pokušaj Audio Otključavanja (Zaštićen u try-catch)
+          try {
+              const song = document.getElementById('song');
+              const voice = document.getElementById('voice');
+              const crackle = document.getElementById('crackleAudio');
+              if (song && song.getAttribute('src')) { song.play().then(()=>song.pause()).catch(e=>console.log("Audio unlock:", e)); }
+              if (voice && voice.getAttribute('src')) { voice.play().then(()=>voice.pause()).catch(e=>console.log("Voice unlock:", e)); }
+              if (crackle) { crackle.play().then(()=>crackle.pause()).catch(e=>console.log("Crackle unlock:", e)); }
+          } catch(e) {}
+
+          // Pokušaj Gyroscope Otključavanja (Zaštićen u try-catch)
+          try {
+              if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                  DeviceOrientationEvent.requestPermission().then(permissionState => { 
+                      if (permissionState === 'granted') { window.addEventListener('devicemotion', devicemotionHandler, false); } 
+                  }).catch(console.error);
+              } else {
+                  window.addEventListener('devicemotion', devicemotionHandler, false);
+              }
+          } catch(e) {}
       });
     });
 
@@ -540,23 +613,34 @@
     // ✨ GLATKI TIMELINE
     const timelineItems = document.querySelectorAll('.timeline-item');
     timelineItems.forEach((item, index) => { 
-        gsap.fromTo(item, {x: (index % 2 === 0 ? -30 : 30), opacity: 0 }, {x: 0, opacity: 1, duration: 0.8, scrollTrigger: { trigger: item, start: 'top 85%', toggleActions: 'play none none reverse'}});
+        gsap.fromTo(item, {x: (index % 2 === 0 ? -30 : 30), opacity: 0}, {x: 0, opacity: 1, duration: 0.8, scrollTrigger: { trigger: item, start: 'top 85%', toggleActions: 'play none none reverse'}});
         ScrollTrigger.create({ trigger: item, start: "top 70%", onEnter: () => item.classList.add('active'), onLeaveBack: () => item.classList.remove('active') }); 
     });
     gsap.to("#tLine", { height: "100%", ease: "none", scrollTrigger: { trigger: "#loveTimeline", start: "top 70%", end: "bottom 70%", scrub: true } });
 
-    // ✨ GLATKA GALERIJA
-    const cards = document.querySelectorAll('.stacking-item');
-    cards.forEach((card, i) => { 
-        let img = card.querySelector('img');
-        gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true } });
-        if (i < cards.length - 1) { 
-            gsap.to(card, { scale: 0.9, opacity: 0, yPercent: -10, ease: "none", scrollTrigger: { trigger: cards[i + 1], start: "top 95%", end: "top 25%", scrub: true } }); 
-        } 
-    });
+    // ==========================================
+    // 🎞️ CINEMATIC CROSSFADE GALERIJA
+    // ==========================================
+    const allGalleryImgs = gsap.utils.toArray('.gallery-img');
+    if(allGalleryImgs.length > 0) {
+        let galTl = gsap.timeline({
+            scrollTrigger: { trigger: ".cinematic-gallery-container", start: "top top", end: "bottom bottom", scrub: 1 }
+        });
+
+        allGalleryImgs.forEach((img, i) => {
+            if(i === 0) {
+                galTl.to(img, { scale: 1.02, duration: 1, ease: "none" }, 0);
+            } else {
+                galTl.to(img, { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, i - 0.5);
+                if(i !== allGalleryImgs.length - 1) {
+                    galTl.to(img, { scale: 1.02, duration: 1, ease: "none" }, i + 0.5);
+                }
+            }
+        });
+    }
 
     // ==========================================
-    // 🔋 BATERIJA
+    // 🔋 BATERIJA 15%
     // ==========================================
     if ('getBattery' in navigator) {
       navigator.getBattery().then(function(battery) {
@@ -566,7 +650,7 @@
       });
     }
 
-    // TICKER
+    // OSTATAK KODA
     const startDate = new Date('2022-02-14T00:00:00').getTime();
     function updateTicker() {
       const diff = new Date().getTime() - startDate;
@@ -586,9 +670,6 @@
         else { tapTimer = setTimeout(() => { tapCount = 0; }, 800); }
     });
 
-    // ==========================================
-    // 📳 SHAKE EFEKAT
-    // ==========================================
     let lastX = null, lastY = null, lastZ = null; let shakeThreshold = 20; 
     function devicemotionHandler(event) {
         if (hasShaken) return;
@@ -603,7 +684,6 @@
         }
         lastX = acc.x; lastY = acc.y; lastZ = acc.z;
     }
-    window.addEventListener('devicemotion', devicemotionHandler, false);
 
     function requestShakePermission() {
         if (!hasShaken) {
