@@ -138,29 +138,24 @@
        🎞️ CINEMATIC CROSSFADE GALERIJA (BEZ Crne!)
        ========================================== */
     .cinematic-gallery-container { 
-        height: 1000vh; /* Zavisno od broja slika daje prostora za dug, fluidan skrol */
+        height: 1000vh;
         width: 100vw; 
         margin-left: calc(-50vw + 50%); 
         position: relative; 
-        /* NOVA POZADINA: Meka premium tamna, NE CRNA */
         background: #1e1610; 
     }
     .gallery-sticky { position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
     
     .gallery-img { position: absolute; inset: 0; opacity: 0; transform: scale(1.05); display: flex; align-items: center; justify-content: center; padding: 20px; will-change: transform, opacity; z-index: 1;}
-    /* GSAP upravlja opacity i z-index-om direktno */
     
-    /* SLIKE SE NE SIJEKU! object-fit: contain zadržava originalni format */
     .gallery-img img { 
         max-width: 100%; 
         max-height: 100%; 
         object-fit: contain; 
         border-radius: 16px; 
-        /* Mekša sjena za svjetliju pozadinu */
         box-shadow: 0 25px 50px rgba(0,0,0,0.6);
     }
     
-    /* Filmska vinjeta preko svega za premium fade efekat */
     .gallery-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 50%, rgba(30,22,16,0.8) 100%); z-index: 100; pointer-events: none;}
 
     /* HOLD TO REVEAL */
@@ -207,7 +202,7 @@
     .scratch-hint { position: absolute; top: 30px; left: 0; width: 100%; text-align: center; color: #fff; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; text-shadow: 0 4px 12px rgba(0,0,0,0.6); pointer-events: none; z-index: 10; font-weight: 500; transition: opacity 0.6s ease; }
 
     /* HEART MUSIC CARD */
-    .music-card { padding: 100px 40px; text-align: center; position: relative; overflow: hidden; transition: all 0.5s ease; box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); }
+    .music-card { padding: 100px 40px; text-align: center; position: relative; overflow: hidden; transition: all 0.5s ease; box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); overflow: hidden; }
     .heart-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 440px; height: 440px; opacity: 0.05; z-index: 0; pointer-events: none; animation: heartbeat-bg 3s ease-in-out infinite; }
     .heart-bg svg { width: 100%; height: 100%; fill: var(--accent); }
     .heart-icon-top { width: 32px; height: 32px; margin: 0 auto 24px auto; fill: var(--accent); animation: heartbeat-bg 1.5s ease-in-out infinite; filter: drop-shadow(0 0 10px rgba(166,124,82,0.3)); }
@@ -452,7 +447,7 @@
         <div class="dh-icon"><svg viewBox="0 0 32 29.6"><path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg></div>
         <canvas id="dhCanvas"></canvas>
         <div class="dh-reveal">
-          <img src="https://plus.unsplash.com/premium_photo-1661963179897-c691d8a683b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzU5fHxsb3ZlJTIwY291cGxlfGVufDB8MHwwfHx8MA%3D%3D" alt="Unlocked" loading="lazy" />
+          <img src="https://plus.unsplash.com/premium_photo-1661963179897-c691d8a683b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mz9fHxsb3ZlJTIwY291cGxlfGVufDB8MHwwfHx8MA%3D%3D" alt="Unlocked" loading="lazy" />
         </div>
       </div>
     </section>
@@ -477,7 +472,7 @@
         </div>
         
         <audio id="song" src="ljubavna-pjesma.mp3" preload="auto" loop></audio>
-        <audio id="voice" src="" preload="auto" preload="auto" loop></audio>
+        <audio id="voice" src="" preload="auto" loop></audio>
       </div>
     </section>
 
@@ -514,6 +509,28 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
+    // ========================================================
+    // 🔒 PROFI ANTI-AUTOMATSKI SISTEM (SIGURNA DOM LOKACIJA)
+    // ========================================================
+    window.addEventListener('DOMContentLoaded', () => {
+        const song = document.getElementById('song');
+        const crackleAudio = document.getElementById('crackleAudio');
+        const playBtn = document.getElementById('playBtn');
+        const waveVisual = document.getElementById('waveVisual');
+
+        if (song) { song.pause(); song.currentTime = 0; }
+        if (crackleAudio) { crackleAudio.pause(); crackleAudio.currentTime = 0; }
+        if (playBtn) playBtn.innerHTML = '🎵 Our Song';
+        if (waveVisual) waveVisual.style.display = 'none';
+    });
+
+    window.addEventListener('load', () => {
+        const song = document.getElementById('song');
+        const crackleAudio = document.getElementById('crackleAudio');
+        if (song) song.pause();
+        if (crackleAudio) crackleAudio.pause();
+    });
+
     // ==========================================
     // 🔐 LOADER & SIGURAN AUDIO UNLOCK 
     // ==========================================
@@ -534,7 +551,6 @@
       }, 1500); 
       
       document.getElementById('enterBtn').addEventListener('click', function() {
-          // ODMAH uklanjamo loader, bez obzira na greške u senzorima
           const tl = gsap.timeline({ 
             onComplete: () => { 
                 document.body.classList.remove('is-loading'); ScrollTrigger.refresh(); 
@@ -544,16 +560,6 @@
           });
           tl.to("#loader", { yPercent: -100, duration: 1.2, ease: "power4.inOut" })
             .from(".hero-content", { y: 40, opacity: 0, duration: 1.2, ease: "power2.out" }, "-=0.6");
-
-          // Pokušaj Audio Otključavanja (Zaštićen u try-catch)
-          try {
-              const song = document.getElementById('song');
-              const voice = document.getElementById('voice');
-              const crackle = document.getElementById('crackleAudio');
-              if (song && song.getAttribute('src')) { song.play().then(()=>song.pause()).catch(e=>console.log("Audio unlock:", e)); }
-              if (voice && voice.getAttribute('src')) { voice.play().then(()=>voice.pause()).catch(e=>console.log("Voice unlock:", e)); }
-              if (crackle) { crackle.play().then(()=>crackle.pause()).catch(e=>console.log("Crackle unlock:", e)); }
-          } catch(e) {}
 
           // Pokušaj Gyroscope Otključavanja (Zaštićen u try-catch)
           try {
@@ -592,11 +598,10 @@
     gsap.to("#tLine", { height: "100%", ease: "none", scrollTrigger: { trigger: "#loveTimeline", start: "top 70%", end: "bottom 70%", scrub: true } });
 
     // ==========================================
-    // 🎞️ CINEMATIC CROSSFADE GALERIJA (Popravljena logika prelijevanja)
+    // 🎞️ CINEMATIC CROSSFADE GALERIJA
     // ==========================================
     const allGalleryImgs = gsap.utils.toArray('.gallery-img');
     if(allGalleryImgs.length > 0) {
-        // Skrivamo sve slike osim prve za čist start
         gsap.set(allGalleryImgs.slice(1), { opacity: 0 });
 
         let galTl = gsap.timeline({
@@ -607,14 +612,8 @@
             if(i === 0) {
                 galTl.to(img, { scale: 1.02, duration: 1, ease: "none" }, 0);
             } else {
-                // Crossfade: Trenutna slika izlazi, nova ulazi. Z-index se automatski rješava stacking orderom u HTMLu, ali GSAP osigurava čistoću prelijevanja.
-                
-                // Prethodna slika se melt-out-uje
                 galTl.to(allGalleryImgs[i-1], { opacity: 0, scale: 0.98, duration: 1, ease: "power2.inOut" }, i - 0.7);
-                
-                // Nova slika se melt-in-uje
                 galTl.to(img, { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, i - 0.7);
-                
                 if(i !== allGalleryImgs.length - 1) {
                     galTl.to(img, { scale: 1.02, duration: 1, ease: "none" }, i + 0.3);
                 }
@@ -753,77 +752,107 @@
         });
     });
     focusOverlay.addEventListener('click', () => {
+        const voice = document.getElementById('voice');
+        const voiceBtn = document.getElementById('voiceBtn');
         flipCards.forEach(c => {
             c.classList.remove('flipped');
             let parentSection = c.closest('.section');
             if(parentSection) parentSection.style.zIndex = '';
         });
-        if(!voice.paused) {
-            voice.pause(); voiceBtn.innerHTML = '🎙️ My Message'; toggleWave();
+        if(voice && !voice.paused) {
+            voice.pause(); if(voiceBtn) voiceBtn.innerHTML = '🎙️ My Message'; toggleWave();
             let parentSection = voiceBtn.closest('.section'); if(parentSection) parentSection.style.zIndex = '';
         }
         document.body.classList.remove('focus-mode');
     });
 
-    const playBtn = document.getElementById('playBtn'); const voiceBtn = document.getElementById('voiceBtn'); const waveVisual = document.getElementById('waveVisual'); const song = document.getElementById('song'); const voice = document.getElementById('voice');
-    const crackleAudio = document.getElementById('crackleAudio');
-    
-    function toggleWave() { if (!song.paused || !voice.paused) { waveVisual.style.display = 'flex'; } else { waveVisual.style.display = 'none'; } }
-    
-    playBtn.addEventListener('click', () => { 
+    // SINKRONIZACIJA AUDIO TALASA
+    function toggleWave() { 
         const song = document.getElementById('song');
-        const crackleAudio = document.getElementById('crackleAudio');
-        
-        if (song.paused) { 
-            // Prvo palimo tiho krckanje gramofona u pozadini
-            if (crackleAudio) {
-                crackleAudio.play().catch(e => console.log("Crackle audio blocked"));
-            }
-            
-            // Puštamo tvoju pjesmu
-            song.play().then(() => {
-                playBtn.innerHTML = '⏸ Pause Song';
-                toggleWave(); // Pali animaciju talasa
-            }).catch(error => {
-                console.log("Audio playback error:", error);
-            });
-            
+        const voice = document.getElementById('voice');
+        const waveVisual = document.getElementById('waveVisual');
+        if ((song && !song.paused) || (voice && !voice.paused)) { 
+            if(waveVisual) waveVisual.style.display = 'flex'; 
         } else { 
-            // Ako pjesma već svira, klik je pauzira
-            if (crackleAudio) crackleAudio.pause(); 
-            song.pause(); 
-            playBtn.innerHTML = '🎵 Our Song'; 
-            toggleWave(); // Gasi animaciju talasa
+            if(waveVisual) waveVisual.style.display = 'none'; 
         } 
-    });
+    }
     
-    voiceBtn.addEventListener('click', () => { 
-        song.pause(); crackleAudio.pause(); playBtn.innerHTML = '🎵 Our Song'; 
-        let parentSection = voiceBtn.closest('.section');
-        
-        if (voice.paused) { 
-            voice.play(); 
-            voiceBtn.innerHTML = '⏸ Pause Message'; 
-            document.body.classList.add('focus-mode');
-            parentSection.style.position = 'relative';
-            parentSection.style.zIndex = '999';
-        } else { 
-            voice.pause(); 
-            voiceBtn.innerHTML = '🎙️ My Message'; 
+    // AUDIO LOGIKA NA DUGME - BEZ AUTOMATSKOG POKRETANJA
+    const playBtn = document.getElementById('playBtn');
+    if (playBtn) {
+        playBtn.addEventListener('click', () => { 
+            const song = document.getElementById('song');
+            const crackleAudio = document.getElementById('crackleAudio');
+            
+            if (song.paused) { 
+                if (crackleAudio) {
+                    crackleAudio.play().catch(e => console.log("Crackle audio blocked"));
+                }
+                
+                song.play().then(() => {
+                    playBtn.innerHTML = '⏸ Pause Song';
+                    toggleWave(); 
+                }).catch(error => {
+                    console.log("Audio playback error:", error);
+                });
+                
+            } else { 
+                if (crackleAudio) crackleAudio.pause(); 
+                song.pause(); 
+                playBtn.innerHTML = '🎵 Our Song'; 
+                toggleWave(); 
+            } 
+        });
+    }
+    
+    const voiceBtn = document.getElementById('voiceBtn');
+    if (voiceBtn) {
+        voiceBtn.addEventListener('click', () => { 
+            const song = document.getElementById('song');
+            const voice = document.getElementById('voice');
+            const crackleAudio = document.getElementById('crackleAudio');
+            if(song) song.pause(); 
+            if(crackleAudio) crackleAudio.pause(); 
+            if(playBtn) playBtn.innerHTML = '🎵 Our Song'; 
+            let parentSection = voiceBtn.closest('.section');
+            
+            if (voice.paused) { 
+                voice.play(); 
+                voiceBtn.innerHTML = '⏸ Pause Message'; 
+                document.body.classList.add('focus-mode');
+                parentSection.style.position = 'relative';
+                parentSection.style.zIndex = '999';
+            } else { 
+                voice.pause(); 
+                voiceBtn.innerHTML = '🎙️ My Message'; 
+                document.body.classList.remove('focus-mode');
+                parentSection.style.zIndex = '';
+            } 
+            toggleWave(); 
+        });
+    }
+    
+    const songEl = document.getElementById('song');
+    if (songEl) {
+        songEl.addEventListener('ended', () => { 
+            const crackleAudio = document.getElementById('crackleAudio');
+            if(crackleAudio) crackleAudio.pause(); 
+            if(playBtn) playBtn.innerHTML = '🎵 Our Song'; 
+            toggleWave(); 
+        }); 
+    }
+
+    const voiceEl = document.getElementById('voice');
+    if (voiceEl) {
+        voiceEl.addEventListener('ended', () => { 
+            if(voiceBtn) voiceBtn.innerHTML = '🎙️ My Message'; 
+            toggleWave(); 
             document.body.classList.remove('focus-mode');
-            parentSection.style.zIndex = '';
-        } 
-        toggleWave(); 
-    });
-    
-    song.addEventListener('ended', () => { crackleAudio.pause(); playBtn.innerHTML = '🎵 Our Song'; toggleWave(); }); 
-    voice.addEventListener('ended', () => { 
-        voiceBtn.innerHTML = '🎙️ My Message'; 
-        toggleWave(); 
-        document.body.classList.remove('focus-mode');
-        let parentSection = voiceBtn.closest('.section');
-        if(parentSection) parentSection.style.zIndex = '';
-    });
+            let parentSection = voiceBtn.closest('.section');
+            if(parentSection) parentSection.style.zIndex = '';
+        });
+    }
 
     const twText = document.getElementById('typewriterText');
     const originalText = twText.getAttribute('data-text'); 
@@ -849,8 +878,9 @@
     }
     ScrollTrigger.create({ trigger: ".final", start: "top 60%", onEnter: () => { if(twIndex === 0) typeWriter(); } });
 
-    // Čelična kočnica - čim se skripta učita, pjesma se nasilno pauzira u memoriji
-    document.getElementById('song').pause();
+    // Čelična kočnica na samom kraju rada skripte
+    const finalSongCheck = document.getElementById('song');
+    if(finalSongCheck) finalSongCheck.pause();
 
   </script>
 </body>
